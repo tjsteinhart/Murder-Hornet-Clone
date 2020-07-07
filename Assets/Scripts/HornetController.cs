@@ -15,6 +15,11 @@ public class HornetController : MonoBehaviour
     Vector3 rotateDrag;
     private Quaternion rotation;
 
+    private void Start()
+    {
+        
+    }
+
     private void OnEnable()
     {
         EventManager.Instance.onStartGameplay += UpdateMovement;
