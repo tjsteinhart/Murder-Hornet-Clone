@@ -11,11 +11,13 @@ public class HornetController : MonoBehaviour
     [SerializeField] bool isMoving;
 
     Animator hornetAnimator;
+    Rigidbody rb;
 
     private void Start()
     {
         isMoving = false;
         hornetAnimator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody>();
     }
 
     private void OnEnable()
@@ -61,22 +63,30 @@ public class HornetController : MonoBehaviour
 
             Debug.Log(-Input.GetAxis("Mouse Y") * rotationspeed * Time.deltaTime);
         }
-        GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
         
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.gameObject.tag == "Target")
-        {
-            StartCoroutine(StingAttack(other.gameObject));
-            EventManager.Instance.TargetStung(other.GetComponent<TargetController>());
-        }
-    }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if(other.gameObject.tag == "Target")
+    //    {
+    //        StartCoroutine(StingAttack(other.gameObject));
+    //        EventManager.Instance.TargetStung(other.GetComponent<TargetController>());
+    //        other.enabled = false;
+    //    }
+    //}
 
     private void OnCollisionEnter(Collision collision)
     {
-        GetComponent<Rigidbody>().velocity = Vector3.zero;
+        var targetController = collision.gameObject.GetComponent<TargetController>();
+        if(collision.gameObject.tag == "Target" && targetController.CanSting())
+        {
+            StartCoroutine(StingAttack(collision.gameObject));
+            EventManager.Instance.TargetStung(targetController);
+            targetController.SetCanSting(false);
+        }
+        rb.velocity = Vector3.zero;
     }
 
     IEnumerator StingAttack(GameObject other)
@@ -85,6 +95,7 @@ public class HornetController : MonoBehaviour
         hornetAnimator.SetTrigger("HornetSting");
         Handheld.Vibrate();
         other.GetComponent<Rigidbody>().AddForce(this.transform.forward * baseStingForce, ForceMode.Impulse);
+        other.GetComponent<TargetController>().PlayExclamation();
         yield return new WaitForSeconds(.5f);
         isMoving = true;
     }
@@ -92,6 +103,7 @@ public class HornetController : MonoBehaviour
     private void EndMovement()
     {
         isMoving = false;
+        rb.velocity = Vector3.zero;
     }
 
 }
