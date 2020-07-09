@@ -61,7 +61,6 @@ public class HornetController : MonoBehaviour
             // rotate around local X
             transform.Rotate(-Input.GetAxis("Mouse Y") * rotationspeed * Time.deltaTime, 0, 0);
 
-            Debug.Log(-Input.GetAxis("Mouse Y") * rotationspeed * Time.deltaTime);
         }
         rb.angularVelocity = Vector3.zero;
         

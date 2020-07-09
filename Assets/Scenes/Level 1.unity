@@ -580,7 +580,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetExclamation: {fileID: 0}
+  targetAnimator: {fileID: 0}
   canSting: 0
+  targetCollider: {fileID: 0}
 --- !u!1 &166038332
 GameObject:
   m_ObjectHideFlags: 0
@@ -1174,7 +1176,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetExclamation: {fileID: 0}
+  targetAnimator: {fileID: 0}
   canSting: 0
+  targetCollider: {fileID: 0}
 --- !u!1 &248253744
 GameObject:
   m_ObjectHideFlags: 0
@@ -1778,8 +1782,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1cf746a0b7fa8149bc6eef5e03ec196, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetExclamation: {fileID: 0}
+  targetExclamation: {fileID: 928803319}
+  targetAnimator: {fileID: 352338022}
   canSting: 0
+  targetCollider: {fileID: 0}
 --- !u!136 &352338020
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1808,7 +1814,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 16
   m_CollisionDetection: 0
 --- !u!95 &352338022
 Animator:
@@ -3184,7 +3190,7 @@ GameObject:
   - component: {fileID: 928803320}
   - component: {fileID: 928803319}
   m_Layer: 8
-  m_Name: Image
+  m_Name: Target Stung Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

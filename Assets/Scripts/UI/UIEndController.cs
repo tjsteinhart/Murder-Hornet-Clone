@@ -41,4 +41,6 @@ public class UIEndController : MonoBehaviour
     {
         SceneLoader.Instance.NextLevel();
     }
+
+
 }

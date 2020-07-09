@@ -8,13 +8,14 @@ public class TargetController : MonoBehaviour
     [SerializeField] Image targetExclamation;
     [SerializeField] Animator targetAnimator;
     [SerializeField] bool canSting;
+    [SerializeField] Collider targetCollider;
 
     public bool CanSting() => canSting;
+    public Collider TargetCollider() => targetCollider;
 
     private void Start()
     {
         canSting = true;
-        targetAnimator = GetComponent<Animator>();
     }
 
     public void SetCanSting(bool sting)
