@@ -1,19 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 public class UIStartController : MonoBehaviour
 {
-    [SerializeField] Text speedLevel;
-    [SerializeField] Text speedCost;
-    [SerializeField] Text stingLevel;
-    [SerializeField] Text stingCost;
+    [SerializeField] TextMeshProUGUI speedLevel;
+    [SerializeField] TextMeshProUGUI speedCost;
+    [SerializeField] TextMeshProUGUI stingLevel;
+    [SerializeField] TextMeshProUGUI stingCost;
+    [SerializeField] TextMeshProUGUI levelNum;
 
     private void Start()
     {
         UpdateSpeedButtonUI();
         UpdateStingButtonUI();
+        UpdateLevelNum();
     }
 
     public void StartGameplay()
@@ -50,6 +52,11 @@ public class UIStartController : MonoBehaviour
     {
         stingLevel.text = "Level " + GameManager.Instance.GetStingForceModifier().ToString();
         stingCost.text = GameManager.Instance.GetStingUpgradeCost().ToString();
+    }
+
+    public void UpdateLevelNum()
+    {
+        levelNum.text = "Level " + SceneLoader.Instance.GetCurrentSceneIndex().ToString();
     }
 
 }

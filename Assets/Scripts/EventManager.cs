@@ -5,6 +5,7 @@ using System;
 
 public class EventManager : Singleton<EventManager>
 {
+    #region Gameplay States
     public event Action onStartGameplay;
     public void StartGameplay()
     {
@@ -31,5 +32,14 @@ public class EventManager : Singleton<EventManager>
             onEndGamePlay();
         }
     }
+    #endregion
 
+    public event Action<TargetController> onTargetStung;
+    public void TargetStung(TargetController target)
+    {
+        if(onTargetStung != null)
+        {
+            onTargetStung(target);
+        }
+    }
 }

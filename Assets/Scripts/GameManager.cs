@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : Singleton<GameManager>
 {
     [SerializeField] int playerSpeedModifier = 1;
-    [SerializeField] int playerStingForceModifier = 2;
+    [SerializeField] int playerStingForceModifier = 1;
     [SerializeField] int rubyAmount = 0;
     [SerializeField] int speedUpgradeCost = 10;
     [SerializeField] int speedUpgradeCostModifier = 10;
@@ -57,7 +57,7 @@ public class GameManager : Singleton<GameManager>
     public void IncrementPlayerStingModifier(int value)
     {
         rubyAmount -= stingUpgradeCost;
-        playerStingForceModifier += value * 2;
+        playerStingForceModifier += value;
         stingUpgradeCost += stingUpgradeCostModifier;
     }
 

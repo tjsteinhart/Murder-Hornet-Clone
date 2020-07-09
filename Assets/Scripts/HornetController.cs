@@ -8,21 +8,20 @@ public class HornetController : MonoBehaviour
     [SerializeField] float forwardSpeed = .1f;
     [SerializeField] float rotationspeed = 100f;
     [SerializeField] float baseStingForce = 10;
-    [SerializeField] bool isMoving = false;
+    [SerializeField] bool isMoving;
 
-    Vector3 dragOffset;
-    Vector3 startDragPos;
-    Vector3 rotateDrag;
-    private Quaternion rotation;
+    Animator hornetAnimator;
 
     private void Start()
     {
-        
+        isMoving = false;
+        hornetAnimator = GetComponent<Animator>();
     }
 
     private void OnEnable()
     {
         EventManager.Instance.onStartGameplay += UpdateMovement;
+        EventManager.Instance.onEndGamePlay += EndMovement;
     }
 
     private void OnDisable()
@@ -30,13 +29,14 @@ public class HornetController : MonoBehaviour
         if(EventManager.Instance != null)
         {
             EventManager.Instance.onStartGameplay -= UpdateMovement;
+            EventManager.Instance.onEndGamePlay -= EndMovement;
         }
     }
 
     private void UpdateMovement()
     {
-        baseStingForce = baseStingForce + (GameManager.Instance.GetStingForceModifier() / 10);
-        forwardSpeed = forwardSpeed * GameManager.Instance.GetPlayerSpeedModifier();
+        baseStingForce *= (GameManager.Instance.GetStingForceModifier());
+        forwardSpeed *= GameManager.Instance.GetPlayerSpeedModifier();
         isMoving = true;
     }
 
@@ -45,28 +45,53 @@ public class HornetController : MonoBehaviour
     {
         if (isMoving)
         {
-            transform.Translate(Vector3.forward * forwardSpeed);
-            if (Input.GetMouseButton(0))
-            {
-                transform.Rotate(0, Input.GetAxis("Mouse X") * rotationspeed * Time.deltaTime, 0, Space.World);
-                // rotate around local X
-                transform.Rotate(-Input.GetAxis("Mouse Y") * rotationspeed * Time.deltaTime, 0, 0);
-            }
+            HornetMovement();
         }
     }
 
-    private void OnCollisionEnter(Collision other)
+    private void HornetMovement()
+    {
+        //Forward Movement
+        transform.Translate(Vector3.forward * forwardSpeed);
+        if (Input.GetMouseButton(0))
+        {
+            transform.Rotate(0, Input.GetAxis("Mouse X") * rotationspeed * Time.deltaTime, 0, Space.World);
+            // rotate around local X
+            transform.Rotate(-Input.GetAxis("Mouse Y") * rotationspeed * Time.deltaTime, 0, 0);
+
+            Debug.Log(-Input.GetAxis("Mouse Y") * rotationspeed * Time.deltaTime);
+        }
+        GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+        
+    }
+
+    private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == "Target")
         {
-            StingAttack(other.gameObject);
+            StartCoroutine(StingAttack(other.gameObject));
+            EventManager.Instance.TargetStung(other.GetComponent<TargetController>());
         }
     }
 
-    private void StingAttack(GameObject other)
+    private void OnCollisionEnter(Collision collision)
     {
-        other.GetComponent<Rigidbody>().AddForce(Vector3.forward * baseStingForce, ForceMode.Impulse);
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
     }
 
+    IEnumerator StingAttack(GameObject other)
+    {
+        isMoving = false;
+        hornetAnimator.SetTrigger("HornetSting");
+        Handheld.Vibrate();
+        other.GetComponent<Rigidbody>().AddForce(this.transform.forward * baseStingForce, ForceMode.Impulse);
+        yield return new WaitForSeconds(.5f);
+        isMoving = true;
+    }
+
+    private void EndMovement()
+    {
+        isMoving = false;
+    }
 
 }

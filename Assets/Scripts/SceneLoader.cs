@@ -3,25 +3,37 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneLoader : MonoBehaviour
+public class SceneLoader : Singleton<SceneLoader>
 {
     int currentSceneIndex;
+    public int GetCurrentSceneIndex() => currentSceneIndex;
 
-    // Start is called before the first frame update
     void Start()
     {
+        currentSceneIndex = 0;
         StartCoroutine(StartGame());
     }
 
     private IEnumerator StartGame()
     {
-        //SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
-        AsyncOperation asyncLoadLevel = SceneManager.LoadSceneAsync(1, LoadSceneMode.Additive);
+        currentSceneIndex += 1;
+        AsyncOperation asyncLoadLevel = SceneManager.LoadSceneAsync(currentSceneIndex, LoadSceneMode.Additive);
         while (!asyncLoadLevel.isDone)
         {
             yield return null;
         }
-        SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(1));
+        SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(currentSceneIndex));
+    }
+
+    public void NextLevel()
+    {
+        currentSceneIndex += 1;
+        AsyncOperation asyncLoadLevel = SceneManager.LoadSceneAsync(currentSceneIndex);
+    }
+
+    public void RestartLevel()
+    {
+        SceneManager.LoadScene(currentSceneIndex);
     }
 
 }

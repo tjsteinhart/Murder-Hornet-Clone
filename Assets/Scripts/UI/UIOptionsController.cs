@@ -1,20 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using TMPro;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class UIOptionsController : MonoBehaviour
 {
-    [SerializeField] Text currentRubyAmountText;
+    [SerializeField] TextMeshProUGUI currentRubyAmountText;
+    //[SerializeField] Image settingsScreen;
 
-    // Start is called before the first frame update
     void Start()
     {
         UpdateRubyAmount();
+        //settingsScreen.gameObject.SetActive(false);
     }
 
-    // Update is called once per frame
     void Update()
     {
         UpdateRubyAmount();
@@ -25,8 +23,20 @@ public class UIOptionsController : MonoBehaviour
         currentRubyAmountText.text = GameManager.Instance.GetRubyAmount().ToString();
     }
 
+    public void ShowOptionsScreen()
+    {
+        Time.timeScale = 0;
+        //settingsScreen.gameObject.SetActive(true);
+    }
+
+    public void ExitOptionsScreen()
+    {
+        //settingsScreen.gameObject.SetActive(false);
+        Time.timeScale = 1;
+    }
+
     public void RestartLevel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().ToString());
+        SceneLoader.Instance.RestartLevel();
     }
 }
