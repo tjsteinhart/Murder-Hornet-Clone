@@ -13,6 +13,12 @@ public class HornetController : MonoBehaviour
     Animator hornetAnimator;
     Rigidbody rb;
 
+    //Variables for moving with touch
+    Touch touch;
+    Vector2 touchPos;
+    Quaternion rotation;
+    float touchRotateSpeedModifier = .1f;
+
     private void Start()
     {
         isMoving = false;
@@ -22,7 +28,7 @@ public class HornetController : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.Instance.onStartGameplay += UpdateMovement;
+        UpdateMovement();
         EventManager.Instance.onEndGamePlay += EndMovement;
     }
 
@@ -30,7 +36,6 @@ public class HornetController : MonoBehaviour
     {
         if(EventManager.Instance != null)
         {
-            EventManager.Instance.onStartGameplay -= UpdateMovement;
             EventManager.Instance.onEndGamePlay -= EndMovement;
         }
     }
@@ -49,32 +54,37 @@ public class HornetController : MonoBehaviour
         {
             HornetMovement();
         }
+        else
+        {
+            rb.velocity = Vector3.zero;
+        }
     }
 
     private void HornetMovement()
     {
         //Forward Movement
         transform.Translate(Vector3.forward * forwardSpeed);
+
+        //Rotation Using Mouse
         if (Input.GetMouseButton(0))
         {
             transform.Rotate(0, Input.GetAxis("Mouse X") * rotationspeed * Time.deltaTime, 0, Space.World);
             // rotate around local X
             transform.Rotate(-Input.GetAxis("Mouse Y") * rotationspeed * Time.deltaTime, 0, 0);
-
         }
-        rb.angularVelocity = Vector3.zero;
-        
-    }
 
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if(other.gameObject.tag == "Target")
-    //    {
-    //        StartCoroutine(StingAttack(other.gameObject));
-    //        EventManager.Instance.TargetStung(other.GetComponent<TargetController>());
-    //        other.enabled = false;
-    //    }
-    //}
+        //Rotation Using Touch
+        //if (Input.touchCount > 0)
+        //{
+        //    touch = Input.GetTouch(0);
+        //    if(touch.phase == TouchPhase.Moved)
+        //    {
+        //        transform.Rotate(0f, touch.deltaPosition.x * touchRotateSpeedModifier, 0f, Space.World);
+        //        transform.Rotate(-touch.deltaPosition.y * touchRotateSpeedModifier, 0f, 0f);
+        //    }
+        //}
+        rb.angularVelocity = Vector3.zero;
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
