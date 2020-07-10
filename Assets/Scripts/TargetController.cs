@@ -3,24 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TargetController : MonoBehaviour
+public class TargetController : MonoBehaviour, IGetStung
 {
-    [SerializeField] Image targetExclamation;
     [SerializeField] Animator targetAnimator;
     [SerializeField] bool canSting;
-    [SerializeField] Collider targetCollider;
-
-    public bool CanSting() => canSting;
-    public Collider TargetCollider() => targetCollider;
+    [SerializeField] Transform childObjectTransform;
+    [SerializeField] Transform childCanvasTransform;
+    [SerializeField] Vector3 canvasAdjustment;
+    [SerializeField] Rigidbody myRigidBody;
+    [SerializeField] Collider triggerCollider;
+    HornetController hornet;
 
     private void Start()
     {
         canSting = true;
+        hornet = FindObjectOfType<HornetController>();
     }
 
-    public void SetCanSting(bool sting)
+    private void Update()
     {
-        canSting = sting;
+        childCanvasTransform.position = childObjectTransform.position + canvasAdjustment;
     }
 
     public void PlayExclamation()
@@ -28,4 +30,13 @@ public class TargetController : MonoBehaviour
         targetAnimator.SetTrigger("TargetStung");
     }
 
+    public void GetStung()
+    {
+        EventManager.Instance.TargetStung(this);
+        canSting = false;
+        PlayExclamation();
+        myRigidBody.AddForce(hornet.GetComponent<Transform>().forward * hornet.CurrentSting(), ForceMode.Impulse);
+        childCanvasTransform.LookAt(Camera.main.transform);
+        triggerCollider.enabled = false;
+    }
 }

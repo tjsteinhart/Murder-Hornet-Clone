@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
-    [SerializeField] int playerSpeedModifier = 1;
-    [SerializeField] int playerStingForceModifier = 1;
+    [SerializeField] int playerSpeedIncrement = 0;
+    [SerializeField] int playerStingIncrement = 0;
     [SerializeField] int rubyAmount = 0;
     [SerializeField] int speedUpgradeCost = 10;
     [SerializeField] int speedUpgradeCostModifier = 10;
@@ -50,25 +50,25 @@ public class GameManager : Singleton<GameManager>
     public void IncrementPlayerSpeedModifier(int value)
     {
         rubyAmount -= speedUpgradeCost;
-        playerSpeedModifier += value;
+        playerSpeedIncrement += value;
         speedUpgradeCost += speedUpgradeCostModifier;
     }
 
     public void IncrementPlayerStingModifier(int value)
     {
         rubyAmount -= stingUpgradeCost;
-        playerStingForceModifier += value;
+        playerStingIncrement += value;
         stingUpgradeCost += stingUpgradeCostModifier;
     }
 
     public int GetPlayerSpeedModifier()
     {
-        return playerSpeedModifier;
+        return playerSpeedIncrement;
     }
 
     public int GetStingForceModifier()
     {
-        return playerStingForceModifier;
+        return playerStingIncrement;
     }
 
     
