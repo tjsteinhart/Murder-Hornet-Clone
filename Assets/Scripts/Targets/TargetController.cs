@@ -40,4 +40,14 @@ public class TargetController : MonoBehaviour, IGetStung
         childCanvasTransform.LookAt(Camera.main.transform);
         triggerCollider.enabled = false;
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Rigidbody rb = GetComponent<Rigidbody>();
+        if (collision.gameObject.GetComponent<TargetController>())
+        {
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
+    }
 }
