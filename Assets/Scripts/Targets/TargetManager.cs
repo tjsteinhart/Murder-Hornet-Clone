@@ -16,6 +16,7 @@ public class TargetManager : MonoBehaviour
     bool targetGridOn = true;
 
     public int GetRubiesGainedPerLevel() => rubiesGainedperLevel;
+    public List<TargetController> GetTargetList() => targetList;
 
     // Start is called before the first frame update
     void Start()
