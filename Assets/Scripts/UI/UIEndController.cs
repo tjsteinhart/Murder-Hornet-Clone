@@ -13,9 +13,6 @@ public class UIEndController : MonoBehaviour
     [SerializeField] Transform rubiesEarnedImageTransform;
     [SerializeField] Transform totalRubiesFromOptionsCanvas;
 
-    private void Start()
-    {
-    }
 
     private void OnEnable()
     {

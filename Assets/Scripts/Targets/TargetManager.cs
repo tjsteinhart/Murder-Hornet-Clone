@@ -9,11 +9,12 @@ public class TargetManager : MonoBehaviour
     [SerializeField] int rubiesGainedperLevel;
 
     [SerializeField] Canvas targetsCanvas;
-    [SerializeField] Transform targetGrid;
+    [SerializeField] GameObject targetGrid;
+    [SerializeField] GameObject targetingImage;
     [SerializeField] GameObject targetCheck;
     [SerializeField] List<Slider> targetChecks;
     [SerializeField] int targetsHitIndex = 0;
-    bool targetGridOn = true;
+    bool targetCanvasObjectsOn = true;
     bool allTargetsHit = false;
 
     public int GetRubiesGainedPerLevel() => rubiesGainedperLevel;
@@ -29,7 +30,7 @@ public class TargetManager : MonoBehaviour
             if (child.GetComponent<TargetController>())
             {
                 targetList.Add(child.GetComponent<TargetController>());
-                GameObject newTarget = Instantiate(targetCheck, targetGrid.position, Quaternion.identity, targetGrid);
+                GameObject newTarget = Instantiate(targetCheck, targetGrid.transform.position, Quaternion.identity, targetGrid.transform);
                 targetChecks.Add(newTarget.GetComponent<Slider>());
             }
         }
@@ -56,8 +57,9 @@ public class TargetManager : MonoBehaviour
 
     void ToggleTargetCanvas()
     {
-        targetGridOn = !targetGridOn;
-        targetGrid.gameObject.SetActive(targetGridOn);
+        targetCanvasObjectsOn = !targetCanvasObjectsOn;
+        targetGrid.SetActive(targetCanvasObjectsOn);
+        targetingImage.SetActive(targetCanvasObjectsOn);
     }
 
     public void TargetDestroyed(TargetController target)

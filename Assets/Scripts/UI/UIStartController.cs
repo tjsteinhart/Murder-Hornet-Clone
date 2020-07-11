@@ -44,13 +44,13 @@ public class UIStartController : MonoBehaviour
 
     public void UpdateSpeedButtonUI()
     {
-        speedLevel.text = "Level " + GameManager.Instance.GetPlayerSpeedModifier().ToString();
+        speedLevel.text = "Level " + (GameManager.Instance.GetPlayerSpeedModifier() + 1).ToString();
         speedCost.text = GameManager.Instance.GetSpeedUpgradeCost().ToString();
     }
 
     public void UpdateStingButtonUI()
     {
-        stingLevel.text = "Level " + GameManager.Instance.GetStingForceModifier().ToString();
+        stingLevel.text = "Level " + (GameManager.Instance.GetStingForceModifier() + 1).ToString();
         stingCost.text = GameManager.Instance.GetStingUpgradeCost().ToString();
     }
 

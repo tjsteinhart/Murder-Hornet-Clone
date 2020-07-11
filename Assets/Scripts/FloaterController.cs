@@ -31,7 +31,7 @@ public class FloaterController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Vector3.SqrMagnitude(myTargetPos - transform.position) < 1f)
+        if (Vector3.SqrMagnitude(myTargetPos - transform.position) < .3f)
         {
             DestroyFloater();
         }
