@@ -14,9 +14,11 @@ public class TargetManager : MonoBehaviour
     [SerializeField] List<Slider> targetChecks;
     [SerializeField] int targetsHitIndex = 0;
     bool targetGridOn = true;
+    bool allTargetsHit = false;
 
     public int GetRubiesGainedPerLevel() => rubiesGainedperLevel;
     public List<TargetController> GetTargetList() => targetList;
+    public bool GetAllTargetsHit() => allTargetsHit;
 
     // Start is called before the first frame update
     void Start()
@@ -66,18 +68,10 @@ public class TargetManager : MonoBehaviour
         rubiesGainedperLevel += 10;
         if(targetList.Count <= 0)
         {
-            StartCoroutine(AllTargetsDestroyed());
+            allTargetsHit = true;
+            EventManager.Instance.FinalHit(target.transform);
         }
-
-        
     }
 
-    IEnumerator AllTargetsDestroyed()
-    {
-        EventManager.Instance.FinalHit();
-        yield return new WaitForSeconds(2);
-        EventManager.Instance.EndGamePlay();
-
-    }
 
 }

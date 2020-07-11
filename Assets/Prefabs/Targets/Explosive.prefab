@@ -4973,7 +4973,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosiveAnimator: {fileID: 5373428114263742514}
   warningClipTime: 200
-  explodeForceModifier: 1
+  explosionForce: 5
+  explosionRadius: 4
   explodeParticles: {fileID: 779707223}
   explosiveObject: {fileID: 5373428112745219006}
   triggerCollider: {fileID: 5373428114263742519}

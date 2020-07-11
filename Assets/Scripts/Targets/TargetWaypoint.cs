@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Cinemachine;
 
 public class TargetWaypoint : MonoBehaviour
 {
@@ -57,7 +58,6 @@ public class TargetWaypoint : MonoBehaviour
             pos.y = Mathf.Clamp(pos.y, minY, maxY);
 
             targetingImage.transform.position = pos;
-
         }
         else
         {

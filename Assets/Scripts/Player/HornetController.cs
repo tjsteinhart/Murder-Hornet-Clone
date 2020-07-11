@@ -7,7 +7,7 @@ public class HornetController : MonoBehaviour
 {
     [SerializeField] float currentSpeed = 3f;
     [SerializeField] float speedModifier = .5f;
-    [SerializeField] float currentSting = 10;
+    [SerializeField] float currentSting = 1;
     [SerializeField] float stingModifier = 2f;
     [SerializeField] float rotationspeed = 100f;
     [SerializeField] bool isMoving;
@@ -16,6 +16,7 @@ public class HornetController : MonoBehaviour
     public float CurrentSting() => currentSting;
 
     Animator hornetAnimator;
+    TargetManager targetManager;
     Rigidbody rb;
 
     //Variables for moving with touch
@@ -29,20 +30,12 @@ public class HornetController : MonoBehaviour
         isMoving = false;
         hornetAnimator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
+        targetManager = FindObjectOfType<TargetManager>();
     }
 
     private void OnEnable()
     {
         UpdateMovement();
-        EventManager.Instance.onEndGamePlay += EndMovement;
-    }
-
-    private void OnDisable()
-    {
-        if(EventManager.Instance != null)
-        {
-            EventManager.Instance.onEndGamePlay -= EndMovement;
-        }
     }
 
     private void UpdateMovement()
@@ -94,14 +87,12 @@ public class HornetController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //var targetController = other.GetComponent<TargetController>();
         IGetStung target = other.GetComponent<IGetStung>();
         TargetController targetController = other.GetComponent<TargetController>();
         if(target != null)
         {
-            StartCoroutine(StingAttack(other.gameObject));
-            //other.GetComponentInChildren<Rigidbody>().AddForce(this.transform.forward * currentSting, ForceMode.Impulse);
             target.GetStung();
+            StartCoroutine(StingAttack(other.gameObject));
         }
         if(targetController != null)
         {
@@ -114,14 +105,15 @@ public class HornetController : MonoBehaviour
         isMoving = false;
         hornetAnimator.SetTrigger("HornetSting");
         Handheld.Vibrate();
+        if (targetManager.GetAllTargetsHit())
+        {
+            isMoving = false;
+            yield return new WaitForSeconds(2f);
+            EventManager.Instance.EndGamePlay();
+            yield break;
+        }
+
         yield return new WaitForSeconds(.5f);
         isMoving = true;
     }
-
-    private void EndMovement()
-    {
-        isMoving = false;
-        rb.velocity = Vector3.zero;
-    }
-
 }

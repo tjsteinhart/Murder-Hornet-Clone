@@ -15,12 +15,12 @@ public class EventManager : Singleton<EventManager>
         }
     }
 
-    public event Action onFinalHit;
-    public void FinalHit()
+    public event Action<Transform> onFinalHit;
+    public void FinalHit(Transform finalTarget)
     {
         if(onFinalHit != null)
         {
-            onFinalHit();
+            onFinalHit(finalTarget);
         }
     }
 

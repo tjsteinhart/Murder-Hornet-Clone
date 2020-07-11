@@ -6,7 +6,7 @@ public class ExplosiveController : MonoBehaviour, IGetStung
 {
     #region Animation Variables
     [SerializeField] Animator explosiveAnimator;
-    [SerializeField] float warningClipTime = 200f;
+    float warningClipTime;
     float timeToImpact;
     float animSpeed;
     float distance;
@@ -14,7 +14,7 @@ public class ExplosiveController : MonoBehaviour, IGetStung
     #endregion
 
     #region Explosion Variables
-    [SerializeField] float explosionForce = 2000f;
+    [SerializeField] float explosionForce = 5f;
     [SerializeField] float explosionRadius = 4f;
     [SerializeField] ParticleSystem explodeParticles;
     [SerializeField] GameObject explosiveObject;
@@ -31,6 +31,7 @@ public class ExplosiveController : MonoBehaviour, IGetStung
     {
         hornet = FindObjectOfType<HornetController>();
         explosiveAnimator.enabled = false;
+        warningClipTime = Vector3.Distance(this.transform.position, hornet.transform.position);
     }
 
     private void OnEnable()
@@ -93,7 +94,7 @@ public class ExplosiveController : MonoBehaviour, IGetStung
             TargetController target = objectInRange.GetComponent<TargetController>();
             if(target != null)
             {
-                target.GetMyRigidBody().AddExplosionForce(explosionForce, transform.position, explosionRadius);
+                target.GetMyRigidBody().AddExplosionForce(explosionForce, transform.position, explosionRadius, explosionForce, ForceMode.Impulse);
                 target.GetStung();
             }
         }

@@ -25,6 +25,7 @@ public class TargetController : MonoBehaviour, IGetStung
     private void Update()
     {
         childCanvasTransform.position = childObjectTransform.position + canvasAdjustment;
+        this.transform.position = childObjectTransform.position;
     }
 
     public void PlayExclamation()
@@ -41,13 +42,4 @@ public class TargetController : MonoBehaviour, IGetStung
         triggerCollider.enabled = false;
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        Rigidbody rb = GetComponent<Rigidbody>();
-        if (collision.gameObject.GetComponent<TargetController>())
-        {
-            rb.velocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
-        }
-    }
 }
