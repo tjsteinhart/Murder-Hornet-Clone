@@ -91,12 +91,17 @@ public class HornetController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //var targetController = other.GetComponent<TargetController>();
-        IGetStung target = other.gameObject.GetComponent<IGetStung>();
+        IGetStung target = other.GetComponent<IGetStung>();
+        TargetController targetController = other.GetComponent<TargetController>();
         if(target != null)
         {
             StartCoroutine(StingAttack(other.gameObject));
             //other.GetComponentInChildren<Rigidbody>().AddForce(this.transform.forward * currentSting, ForceMode.Impulse);
             target.GetStung();
+        }
+        if(targetController != null)
+        {
+            targetController.GetMyRigidBody().AddForce(this.transform.forward * currentSting, ForceMode.Impulse);
         }
     }
 

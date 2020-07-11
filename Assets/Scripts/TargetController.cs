@@ -14,6 +14,8 @@ public class TargetController : MonoBehaviour, IGetStung
     [SerializeField] Collider triggerCollider;
     HornetController hornet;
 
+    public Rigidbody GetMyRigidBody() => myRigidBody;
+
     private void Start()
     {
         canSting = true;
@@ -35,7 +37,6 @@ public class TargetController : MonoBehaviour, IGetStung
         EventManager.Instance.TargetStung(this);
         canSting = false;
         PlayExclamation();
-        myRigidBody.AddForce(hornet.GetComponent<Transform>().forward * hornet.CurrentSting(), ForceMode.Impulse);
         childCanvasTransform.LookAt(Camera.main.transform);
         triggerCollider.enabled = false;
     }

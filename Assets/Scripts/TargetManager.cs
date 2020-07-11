@@ -1,11 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TargetManager : MonoBehaviour
 {
     [SerializeField] List<TargetController> targetList;
     [SerializeField] int rubiesGainedperLevel;
+    [SerializeField] GameObject targetGrid;
+    [SerializeField] List<Slider> targetChecks;
+    [SerializeField] int targetsLeftIndex;
 
     public int GetRubiesGainedPerLevel() => rubiesGainedperLevel;
 
@@ -43,6 +47,8 @@ public class TargetManager : MonoBehaviour
         {
             StartCoroutine(AllTargetsDestroyed());
         }
+
+        
     }
 
     IEnumerator AllTargetsDestroyed()
