@@ -7,9 +7,13 @@ public class TargetManager : MonoBehaviour
 {
     [SerializeField] List<TargetController> targetList;
     [SerializeField] int rubiesGainedperLevel;
-    [SerializeField] GameObject targetGrid;
+
+    [SerializeField] Canvas targetsCanvas;
+    [SerializeField] Transform targetGrid;
+    [SerializeField] GameObject targetCheck;
     [SerializeField] List<Slider> targetChecks;
-    [SerializeField] int targetsLeftIndex;
+    [SerializeField] int targetsHitIndex = 0;
+    bool targetGridOn = true;
 
     public int GetRubiesGainedPerLevel() => rubiesGainedperLevel;
 
@@ -22,13 +26,18 @@ public class TargetManager : MonoBehaviour
             if (child.GetComponent<TargetController>())
             {
                 targetList.Add(child.GetComponent<TargetController>());
+                GameObject newTarget = Instantiate(targetCheck, targetGrid.position, Quaternion.identity, targetGrid);
+                targetChecks.Add(newTarget.GetComponent<Slider>());
             }
         }
+        ToggleTargetCanvas();
     }
 
     private void OnEnable()
     {
         EventManager.Instance.onTargetStung += TargetDestroyed;
+        EventManager.Instance.onStartGameplay += ToggleTargetCanvas;
+        EventManager.Instance.onEndGamePlay += ToggleTargetCanvas;
     }
 
     private void OnDisable()
@@ -36,12 +45,23 @@ public class TargetManager : MonoBehaviour
         if(EventManager.Instance != null)
         {
             EventManager.Instance.onTargetStung -= TargetDestroyed;
+            EventManager.Instance.onStartGameplay -= ToggleTargetCanvas;
+            EventManager.Instance.onEndGamePlay -= ToggleTargetCanvas;
+
         }
+    }
+
+    void ToggleTargetCanvas()
+    {
+        targetGridOn = !targetGridOn;
+        targetGrid.gameObject.SetActive(targetGridOn);
     }
 
     public void TargetDestroyed(TargetController target)
     {
         targetList.Remove(target);
+        targetChecks[targetsHitIndex].fillRect.GetComponent<Image>().fillAmount = 1;
+        targetsHitIndex += 1;
         rubiesGainedperLevel += 10;
         if(targetList.Count <= 0)
         {
