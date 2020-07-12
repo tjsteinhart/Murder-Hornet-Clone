@@ -32,7 +32,6 @@ public class UICollectiblesController : MonoBehaviour
     {
         EventManager.Instance.onStartGameplay += ToggleCollectibleGrid;
         EventManager.Instance.onEndGamePlay += ToggleCollectibleGrid;
-        EventManager.Instance.onCollectibleHit += CollectibleGridUpdate;
     }
 
     private void OnDisable()
@@ -41,7 +40,6 @@ public class UICollectiblesController : MonoBehaviour
         {
             EventManager.Instance.onStartGameplay -= ToggleCollectibleGrid;
             EventManager.Instance.onEndGamePlay -= ToggleCollectibleGrid;
-            EventManager.Instance.onCollectibleHit -= CollectibleGridUpdate;
         }
     }
 
@@ -62,9 +60,16 @@ public class UICollectiblesController : MonoBehaviour
     }
 
 
-    public void CollectibleGridUpdate()
+    public void CollectibleGridUpdate(int index)
     {
-        collectibleSliders[GameManager.Instance.GetCollectibleAmount() - 1].fillRect.GetComponent<Image>().fillAmount = 1;
+        if(index < collectibleSliders.Count)
+        {
+            collectibleSliders[index].fillRect.GetComponent<Image>().fillAmount = 1;
+        }
+        else
+        {
+            return;
+        }
     }
 
 }
