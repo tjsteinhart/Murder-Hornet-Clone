@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject optionsCanvas;
     [SerializeField] GameObject endCanvas;
     [SerializeField] GameObject collectiblesMenu;
+    [SerializeField] TextMeshProUGUI collectiblesMenuRubyAmount;
 
     [SerializeField] FloaterController floaterPrefab;
     [SerializeField] Transform collectiblesMenuFloaterSpawn;
@@ -23,9 +25,9 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
-        startCanvas.gameObject.SetActive(true);
-        endCanvas.gameObject.SetActive(false);
+        startCanvas.SetActive(true);
+        optionsCanvas.SetActive(true);
+        endCanvas.SetActive(false);
         collectiblesMenu.SetActive(false);
     }
 
@@ -55,8 +57,9 @@ public class UIManager : MonoBehaviour
         if (GameManager.Instance.EnoughCollectibles())
         {
             collectiblesMenu.SetActive(true);
+            collectiblesMenuRubyAmount.text = "+ " + GameManager.Instance.GetRubesPerCollectedKeys().ToString();
             GameManager.Instance.IncrementCollectibleAmount(-GameManager.Instance.GetCollectibleAmount());
-            StartCoroutine(SpawnFloaters(collectiblesMenuFloaterSpawn, floaterTarget, 100));
+            StartCoroutine(SpawnFloaters(collectiblesMenuFloaterSpawn, floaterTarget, GameManager.Instance.GetRubesPerCollectedKeys()));
         }
         else
         {

@@ -67,7 +67,7 @@ public class TargetManager : MonoBehaviour
         targetList.Remove(target);
         targetChecks[targetsHitIndex].fillRect.GetComponent<Image>().fillAmount = 1;
         targetsHitIndex += 1;
-        rubiesGainedperLevel += 10;
+        rubiesGainedperLevel += GameManager.Instance.GetRubiesPerTarget();
         if(targetList.Count <= 0)
         {
             allTargetsHit = true;

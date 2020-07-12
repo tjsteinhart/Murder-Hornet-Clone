@@ -52,7 +52,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 937522324}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 058cba836c1846c3aa1c5fd2e28aea77, type: 3}
   m_Name: 
@@ -124,6 +124,7 @@ MonoBehaviour:
   optionsCanvas: {fileID: 6780007117880598984}
   endCanvas: {fileID: 6780007118360456640}
   collectiblesMenu: {fileID: 6780007118418563355}
+  collectiblesMenuRubyAmount: {fileID: 6780007118295555053}
   floaterPrefab: {fileID: 9002018832423032945, guid: 37e93b6d1a947204c8ca7b7e550eb862,
     type: 3}
   collectiblesMenuFloaterSpawn: {fileID: 6780007118141805739}
@@ -681,7 +682,7 @@ PrefabInstance:
     - target: {fileID: 4922023809218467904, guid: f550a8d045cdd0b4f806ecf0307304bb,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4922023809218467905, guid: f550a8d045cdd0b4f806ecf0307304bb,
         type: 3}

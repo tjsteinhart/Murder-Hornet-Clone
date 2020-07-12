@@ -12,23 +12,35 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] int stingUpgradeCost = 10;
     [SerializeField] int stingUpgradeCostModifier = 15;
 
+    [SerializeField] int rubiesPerTarget = 10;
+    [SerializeField] int rubiesPerCollectedKeys = 100;
+
     [SerializeField] int collectibleAmount = 0;
     [SerializeField] int collectiblesNeeded = 3;
     bool enoughCollectibles;
     [SerializeField] bool vibrateOptionOn;
 
     public bool GetVibrateOption() => vibrateOptionOn;
+
+    public int GetRubiesPerTarget() => rubiesPerTarget;
+    public int GetRubesPerCollectedKeys() => rubiesPerCollectedKeys;
+    public int GetRubyAmount() => rubyAmount;
+
+    public int GetCollectibleAmount() => collectibleAmount;
+    public int GetMaxCollectibles() => collectiblesNeeded;
+
+    public int GetSpeedUpgradeCost() => speedUpgradeCost;
+    public int GetStingUpgradeCost() => stingUpgradeCost;
+    public int GetPlayerSpeedModifier() => playerSpeedIncrement;
+    public int GetStingForceModifier() => playerStingIncrement;
+
+
     public void SetVibrateOption(bool isVibrateOn)
     {
         vibrateOptionOn = isVibrateOn;
     }
 
     #region Rubies
-    public int GetRubyAmount()
-    {
-        return rubyAmount;
-    }
-
     public void IncrementRubyAmount(int value)
     {
         rubyAmount += value;
@@ -36,19 +48,9 @@ public class GameManager : Singleton<GameManager>
     #endregion
 
     #region Collectibles
-    public int GetCollectibleAmount()
-    {
-        return collectibleAmount;
-    }
-
     public void IncrementCollectibleAmount(int value)
     {
         collectibleAmount += value;
-    }
-
-    public int GetMaxCollectibles()
-    {
-        return collectiblesNeeded;
     }
 
     public bool EnoughCollectibles()
@@ -66,16 +68,6 @@ public class GameManager : Singleton<GameManager>
     #endregion
 
     #region Hornet Modifiers
-    public int GetSpeedUpgradeCost()
-    {
-        return speedUpgradeCost;
-    }
-
-    public int GetStingUpgradeCost()
-    {
-        return stingUpgradeCost;
-    }
-
     public void IncrementPlayerSpeedModifier(int value)
     {
         rubyAmount -= speedUpgradeCost;
@@ -88,16 +80,6 @@ public class GameManager : Singleton<GameManager>
         rubyAmount -= stingUpgradeCost;
         playerStingIncrement += value;
         stingUpgradeCost += stingUpgradeCostModifier;
-    }
-
-    public int GetPlayerSpeedModifier()
-    {
-        return playerSpeedIncrement;
-    }
-
-    public int GetStingForceModifier()
-    {
-        return playerStingIncrement;
     }
     #endregion
 
