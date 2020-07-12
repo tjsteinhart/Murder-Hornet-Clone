@@ -49,6 +49,6 @@ public class UIEndController : MonoBehaviour
             FloaterController floater = Instantiate(floaterPrefab, randomSpawnPos, Quaternion.identity, this.transform);
             floater.InitializeFloater(targetPos);
         }
-        GameManager.Instance.IncrementRubyAmount(targetManager.GetRubiesGainedPerLevel());
+        GameManager.Instance.IncrementRubyAmount(floaterNum);
     }
 }

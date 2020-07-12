@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] Canvas startCanvas;
-    [SerializeField] Canvas optionsCanvas;
-    [SerializeField] Canvas endCanvas;
+    [SerializeField] GameObject startCanvas;
+    [SerializeField] GameObject optionsCanvas;
+    [SerializeField] GameObject endCanvas;
+    [SerializeField] GameObject collectiblesMenu;
 
     // Start is called before the first frame update
     void Start()
     {
         startCanvas.gameObject.SetActive(true);
         endCanvas.gameObject.SetActive(false);
+        collectiblesMenu.SetActive(false);
     }
 
     private void OnEnable()
@@ -38,6 +40,21 @@ public class UIManager : MonoBehaviour
 
     public void ShowEndCanvas()
     {
-        endCanvas.gameObject.SetActive(true);
+        if (GameManager.Instance.EnoughCollectibles())
+        {
+            collectiblesMenu.SetActive(true);
+            GameManager.Instance.IncrementCollectibleAmount(-GameManager.Instance.GetCollectibleAmount());
+            GameManager.Instance.IncrementRubyAmount(100);
+        }
+        else
+        {
+            endCanvas.SetActive(true);
+        }
+    }
+
+    public void CloseCollectibleMenu()
+    {
+        collectiblesMenu.SetActive(false);
+        endCanvas.SetActive(true);
     }
 }

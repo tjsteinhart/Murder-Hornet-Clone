@@ -14,13 +14,16 @@ public class CollectibleController : MonoBehaviour
     private void OnEnable()
     {
         EventManager.Instance.onStartGameplay += StartCollectibleAnim;
-        EventManager.Instance.onStartGameplay += StopCollectibleAnim;
+        EventManager.Instance.onEndGamePlay += StopCollectibleAnim;
     }
 
     private void OnDisable()
     {
-        EventManager.Instance.onStartGameplay -= StartCollectibleAnim;
-        EventManager.Instance.onStartGameplay -= StopCollectibleAnim;
+        if(EventManager.Instance != null)
+        {
+            EventManager.Instance.onStartGameplay -= StartCollectibleAnim;
+            EventManager.Instance.onEndGamePlay -= StopCollectibleAnim;
+        }
     }
 
     private void OnTriggerEnter(Collider other)

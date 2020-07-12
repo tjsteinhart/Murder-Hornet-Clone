@@ -7,10 +7,6 @@ public class UIOptionsController : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI currentRubyAmountText;
     [SerializeField] GameObject retryButton;
-    [SerializeField] GameObject collectiblesGrid;
-    [SerializeField] GameObject collectibleSlider;
-    [SerializeField] List<Slider> collectibleSliders;
-    [SerializeField] int collectiblesIndex = 0;
 
     bool gameplayUIOn = true;
     //[SerializeField] Image settingsScreen;
@@ -19,17 +15,8 @@ public class UIOptionsController : MonoBehaviour
     {
         UpdateRubyAmount();
         ToggleGameplayUI();
-        
-        for(int i = 0; i < GameManager.Instance.GetMaxCollectibles(); i++)
-        {
-            GameObject newCollectible = Instantiate(collectibleSlider, collectiblesGrid.transform.position, Quaternion.identity, collectiblesGrid.transform);
-            collectibleSliders.Add(newCollectible.GetComponent<Slider>());
-            if(i < GameManager.Instance.GetCollectibleAmount())
-            {
-                collectibleSliders[i].fillRect.GetComponent<Image>().fillAmount = 1;
-                collectiblesIndex++;
-            }
-        }
+
+
         //settingsScreen.gameObject.SetActive(false);
     }
 
@@ -37,7 +24,6 @@ public class UIOptionsController : MonoBehaviour
     {
         EventManager.Instance.onStartGameplay += ToggleGameplayUI;
         EventManager.Instance.onEndGamePlay += ToggleGameplayUI;
-        EventManager.Instance.onCollectibleHit += CollectibleUIUpdate;
     }
 
     private void OnDisable()
@@ -46,7 +32,6 @@ public class UIOptionsController : MonoBehaviour
         {
             EventManager.Instance.onStartGameplay -= ToggleGameplayUI;
             EventManager.Instance.onEndGamePlay -= ToggleGameplayUI;
-            EventManager.Instance.onCollectibleHit -= CollectibleUIUpdate;
 
         }
     }
@@ -65,7 +50,6 @@ public class UIOptionsController : MonoBehaviour
     {
         gameplayUIOn = !gameplayUIOn;
         retryButton.SetActive(gameplayUIOn);
-        collectiblesGrid.SetActive(gameplayUIOn);
     }
 
     public void ShowOptionsScreen()
@@ -85,8 +69,4 @@ public class UIOptionsController : MonoBehaviour
         SceneLoader.Instance.RestartLevel();
     }
 
-    public void CollectibleUIUpdate()
-    {
-
-    } 
 }
