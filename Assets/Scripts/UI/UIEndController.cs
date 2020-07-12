@@ -13,12 +13,13 @@ public class UIEndController : MonoBehaviour
     [SerializeField] Transform rubiesEarnedImageTransform;
     [SerializeField] Transform totalRubiesFromOptionsCanvas;
 
+    public Transform GetRubiesEarnedTransform() => rubiesEarnedImageTransform;
+    public Transform GetTotalRubiesTransform() => totalRubiesFromOptionsCanvas;
 
     private void OnEnable()
     {
         UpdateLevelNum();
         UpdateRubiesEarnedUI();
-        ProcessFloaters();
     }
 
     private void UpdateLevelNum()
@@ -36,19 +37,4 @@ public class UIEndController : MonoBehaviour
         SceneLoader.Instance.NextLevel();
     }
 
-    public void ProcessFloaters()
-    {
-        SpawnFloaters(rubiesEarnedImageTransform.position, totalRubiesFromOptionsCanvas.position, targetManager.GetRubiesGainedPerLevel());
-    }
-
-    public void SpawnFloaters(Vector3 spawnPos, Vector3 targetPos, int floaterNum)
-    {
-        for(int i = 0; i < floaterNum; i++)
-        {
-            Vector3 randomSpawnPos = spawnPos + (Vector3)Random.insideUnitCircle;
-            FloaterController floater = Instantiate(floaterPrefab, randomSpawnPos, Quaternion.identity, this.transform);
-            floater.InitializeFloater(targetPos);
-        }
-        GameManager.Instance.IncrementRubyAmount(floaterNum);
-    }
 }

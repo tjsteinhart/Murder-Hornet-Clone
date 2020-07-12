@@ -10738,6 +10738,12 @@ MonoBehaviour:
   optionsCanvas: {fileID: 278392892}
   endCanvas: {fileID: 1930296372}
   collectiblesMenu: {fileID: 1887830255}
+  floaterPrefab: {fileID: 9002018832423032945, guid: 37e93b6d1a947204c8ca7b7e550eb862,
+    type: 3}
+  collectiblesMenuFloaterSpawn: {fileID: 1610941791}
+  endRubiesFloaterSpawn: {fileID: 166038333}
+  targetManager: {fileID: 1490033945}
+  floaterTarget: {fileID: 1321518807}
 --- !u!1 &1822745461
 GameObject:
   m_ObjectHideFlags: 3

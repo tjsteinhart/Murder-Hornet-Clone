@@ -9,6 +9,13 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject endCanvas;
     [SerializeField] GameObject collectiblesMenu;
 
+    [SerializeField] FloaterController floaterPrefab;
+    [SerializeField] Transform collectiblesMenuFloaterSpawn;
+    [SerializeField] Transform endRubiesFloaterSpawn;
+    [SerializeField] TargetManager targetManager;
+    [SerializeField] Transform floaterTarget;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,11 +51,12 @@ public class UIManager : MonoBehaviour
         {
             collectiblesMenu.SetActive(true);
             GameManager.Instance.IncrementCollectibleAmount(-GameManager.Instance.GetCollectibleAmount());
-            GameManager.Instance.IncrementRubyAmount(100);
+            StartCoroutine(SpawnFloaters(collectiblesMenuFloaterSpawn, floaterTarget, 100));
         }
         else
         {
             endCanvas.SetActive(true);
+            StartCoroutine(SpawnFloaters(endRubiesFloaterSpawn, floaterTarget, targetManager.GetRubiesGainedPerLevel()));
         }
     }
 
@@ -56,5 +64,21 @@ public class UIManager : MonoBehaviour
     {
         collectiblesMenu.SetActive(false);
         endCanvas.SetActive(true);
+        StartCoroutine(SpawnFloaters(endRubiesFloaterSpawn, floaterTarget, targetManager.GetRubiesGainedPerLevel()));
     }
+
+    IEnumerator SpawnFloaters(Transform spawnPoint, Transform targetPoint, int floaterNum)
+    {
+        yield return new WaitForSeconds(.5f);
+        for (int i = 0; i < floaterNum; i++)
+        {
+            Vector3 randomSpawnPos = spawnPoint.position + (Vector3)Random.insideUnitCircle;
+            FloaterController floater = Instantiate(floaterPrefab, randomSpawnPos, Quaternion.identity, spawnPoint);
+            floater.InitializeFloater(targetPoint.position);
+        }
+        GameManager.Instance.IncrementRubyAmount(floaterNum);
+    }
+
+
+
 }
