@@ -54,12 +54,12 @@ public class EventManager : Singleton<EventManager>
         }
     }
 
-    public event Action<CollectibleController> onCollectibleHit;
-    public void CollectibleHit(CollectibleController collectible)
+    public event Action onCollectibleHit;
+    public void CollectibleHit()
     {
         if(onCollectibleHit != null)
         {
-            onCollectibleHit(collectible);
+            onCollectibleHit();
         }
     }
 }

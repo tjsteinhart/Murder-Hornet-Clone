@@ -5,6 +5,8 @@ using UnityEngine;
 public class CollectibleController : MonoBehaviour
 {
     [SerializeField] Animator collectibleAnimator;
+    [SerializeField] GameObject keyObj;
+    [SerializeField] ParticleSystem collectedFX;
 
     void Start()
     {
@@ -30,7 +32,10 @@ public class CollectibleController : MonoBehaviour
     {
         if (other.GetComponent<HornetController>())
         {
-            EventManager.Instance.CollectibleHit(this);
+            EventManager.Instance.CollectibleHit();
+            collectedFX.Play();
+            keyObj.SetActive(false);
+            Destroy(gameObject, .5f);
         }
     }
 

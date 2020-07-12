@@ -44,11 +44,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPersistent: 1
-  playerSpeedModifier: 1
-  playerStingForceModifier: 1
+  playerSpeedIncrement: 0
+  playerStingIncrement: 0
   rubyAmount: 0
   speedUpgradeCost: 10
   speedUpgradeCostModifier: 10
   stingUpgradeCost: 10
   stingUpgradeCostModifier: 15
-  isPlayerMoving: 0
+  rubiesPerTarget: 10
+  rubiesPerCollectedKeys: 100
+  collectibleAmount: 0
+  collectiblesNeeded: 3
+  vibrateOptionOn: 0

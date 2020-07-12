@@ -11,12 +11,14 @@ public class UICollectiblesController : MonoBehaviour
     [SerializeField] GameObject collectibleSlider;
     [SerializeField] List<Slider> collectibleSliders;
     bool collectibleGridOn = false;
+    int collectiblesGathered;
 
     // Start is called before the first frame update
     void Start()
     {
         FillCollectibleGrid();
         collectiblesGrid.SetActive(false);
+        collectiblesGathered = GameManager.Instance.GetCollectibleAmount();
     }
 
     private void FillCollectibleGrid()
@@ -32,6 +34,8 @@ public class UICollectiblesController : MonoBehaviour
     {
         EventManager.Instance.onStartGameplay += ToggleCollectibleGrid;
         EventManager.Instance.onEndGamePlay += ToggleCollectibleGrid;
+        EventManager.Instance.onFinalHit += CalculateCollected;
+        EventManager.Instance.onCollectibleHit += CollectibleGridUpdate;
     }
 
     private void OnDisable()
@@ -40,6 +44,9 @@ public class UICollectiblesController : MonoBehaviour
         {
             EventManager.Instance.onStartGameplay -= ToggleCollectibleGrid;
             EventManager.Instance.onEndGamePlay -= ToggleCollectibleGrid;
+            EventManager.Instance.onFinalHit -= CalculateCollected;
+            EventManager.Instance.onCollectibleHit -= CollectibleGridUpdate;
+
         }
     }
 
@@ -60,16 +67,23 @@ public class UICollectiblesController : MonoBehaviour
     }
 
 
-    public void CollectibleGridUpdate(int index)
+    public void CollectibleGridUpdate()
     {
-        if(index < collectibleSliders.Count)
+        if((collectiblesGathered) < collectibleSliders.Count)
         {
-            collectibleSliders[index].fillRect.GetComponent<Image>().fillAmount = 1;
+            collectibleSliders[collectiblesGathered].fillRect.GetComponent<Image>().fillAmount = 1;
         }
         else
         {
             return;
         }
+        collectiblesGathered++;
     }
+
+    public void CalculateCollected(Transform transform)
+    {
+        GameManager.Instance.IncrementCollectibleAmount(collectiblesGathered);
+    }
+
 
 }

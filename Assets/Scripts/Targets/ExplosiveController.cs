@@ -29,9 +29,7 @@ public class ExplosiveController : MonoBehaviour, IGetStung
     // Start is called before the first frame update
     void Start()
     {
-        hornet = FindObjectOfType<HornetController>();
         explosiveAnimator.enabled = false;
-        warningClipTime = Vector3.Distance(this.transform.position, hornet.transform.position);
     }
 
     private void OnEnable()
@@ -52,12 +50,17 @@ public class ExplosiveController : MonoBehaviour, IGetStung
     // Update is called once per frame
     void Update()
     {
-        UpdateWarningAnimation();
+        if(explosiveAnimator.enabled == true)
+        {
+            UpdateWarningAnimation();
+        }
     }
 
 
     private void StartWarningAnim()
     {
+        hornet = FindObjectOfType<HornetController>();
+        warningClipTime = Vector3.Distance(this.transform.position, hornet.transform.position);
         explosiveAnimator.enabled = true;
     }
 
