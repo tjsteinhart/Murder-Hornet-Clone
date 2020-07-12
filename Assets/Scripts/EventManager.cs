@@ -42,4 +42,13 @@ public class EventManager : Singleton<EventManager>
             onTargetStung(target);
         }
     }
+
+    public event Action onCollectibleHit;
+    public void CollectibleHit()
+    {
+        if(onCollectibleHit != null)
+        {
+            onCollectibleHit();
+        }
+    }
 }

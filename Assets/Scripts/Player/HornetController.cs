@@ -88,6 +88,7 @@ public class HornetController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         IGetStung target = other.GetComponent<IGetStung>();
+
         TargetController targetController = other.GetComponent<TargetController>();
         if(target != null)
         {
@@ -98,6 +99,8 @@ public class HornetController : MonoBehaviour
         {
             targetController.GetMyRigidBody().AddForce(this.transform.forward * currentSting, ForceMode.Impulse);
         }
+
+        
     }
 
     IEnumerator StingAttack(GameObject other)

@@ -12,21 +12,11 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] int stingUpgradeCost = 10;
     [SerializeField] int stingUpgradeCostModifier = 15;
 
-    [SerializeField] List<GameObject> managerList;
+    [SerializeField] int collectibleAmount = 0;
+    [SerializeField] int collectiblesNeeded = 3;
+    bool enoughCollectibles;
 
-    private void Start()
-    {
-        foreach(GameObject manager in managerList)
-        {
-            if(manager != null)
-            {
-                return;
-            }
-
-            GameObject newManager = Instantiate(manager, transform.position, Quaternion.identity, this.transform);
-        }
-    }
-
+    #region Rubies
     public int GetRubyAmount()
     {
         return rubyAmount;
@@ -36,7 +26,39 @@ public class GameManager : Singleton<GameManager>
     {
         rubyAmount += value;
     }
+    #endregion
 
+    #region Collectibles
+    public int GetCollectibleAmount()
+    {
+        return collectibleAmount;
+    }
+
+    public void IncrementCollectibleAmount(int value)
+    {
+        collectibleAmount += value;
+    }
+
+    public int GetMaxCollectibles()
+    {
+        return collectiblesNeeded;
+    }
+
+    public bool EnoughCollectibles()
+    {
+        if (collectibleAmount >= 3)
+        {
+            enoughCollectibles = true;
+        }
+        else
+        {
+            enoughCollectibles = false;
+        }
+        return enoughCollectibles;
+    }
+    #endregion
+
+    #region Hornet Modifiers
     public int GetSpeedUpgradeCost()
     {
         return speedUpgradeCost;
@@ -70,7 +92,7 @@ public class GameManager : Singleton<GameManager>
     {
         return playerStingIncrement;
     }
+    #endregion
 
-    
 
 }
