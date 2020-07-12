@@ -70,10 +70,7 @@ public class HornetController : MonoBehaviour
         //Rotation Using Touch
         if (Input.touchCount > 0)
         {
-            Debug.Log("Received touch: " + Input.touchCount);
             touch = Input.GetTouch(0);
-            Debug.Log(touch.phase);
-
             if (touch.phase == TouchPhase.Moved)
             {
                 

@@ -15,10 +15,15 @@ public class UIManager : MonoBehaviour
     [SerializeField] TargetManager targetManager;
     [SerializeField] Transform floaterTarget;
 
+    private void Awake()
+    {
+        targetManager = FindObjectOfType<TargetManager>();    
+    }
 
     // Start is called before the first frame update
     void Start()
     {
+
         startCanvas.gameObject.SetActive(true);
         endCanvas.gameObject.SetActive(false);
         collectiblesMenu.SetActive(false);

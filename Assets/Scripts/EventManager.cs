@@ -5,6 +5,17 @@ using System;
 
 public class EventManager : Singleton<EventManager>
 {
+    private void OnEnable()
+    {
+        StartCoroutine(SubscribeEvents());
+    }
+
+    IEnumerator SubscribeEvents()
+    {
+        yield return new WaitForEndOfFrame();
+        TimeManager.Instance.SubscribeToEvents();
+    }
+
     #region Gameplay States
     public event Action onStartGameplay;
     public void StartGameplay()
