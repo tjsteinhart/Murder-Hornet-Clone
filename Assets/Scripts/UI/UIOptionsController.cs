@@ -7,9 +7,10 @@ public class UIOptionsController : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI currentRubyAmountText;
     [SerializeField] GameObject retryButton;
+    [SerializeField] Toggle vibrateControl;
 
     bool gameplayUIOn = true;
-    //[SerializeField] Image settingsScreen;
+    [SerializeField] Image settingsScreen;
 
     void Start()
     {
@@ -17,7 +18,7 @@ public class UIOptionsController : MonoBehaviour
         ToggleGameplayUI();
 
 
-        //settingsScreen.gameObject.SetActive(false);
+        settingsScreen.gameObject.SetActive(false);
     }
 
     private void OnEnable()
@@ -55,12 +56,17 @@ public class UIOptionsController : MonoBehaviour
     public void ShowOptionsScreen()
     {
         Time.timeScale = 0;
-        //settingsScreen.gameObject.SetActive(true);
+        settingsScreen.gameObject.SetActive(true);
+    }
+
+    public void ToggleVibrate()
+    {
+        GameManager.Instance.SetVibrateOption(vibrateControl.isOn);
     }
 
     public void ExitOptionsScreen()
     {
-        //settingsScreen.gameObject.SetActive(false);
+        settingsScreen.gameObject.SetActive(false);
         Time.timeScale = 1;
     }
 

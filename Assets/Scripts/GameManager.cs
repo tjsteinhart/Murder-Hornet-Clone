@@ -15,6 +15,13 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] int collectibleAmount = 0;
     [SerializeField] int collectiblesNeeded = 3;
     bool enoughCollectibles;
+    bool vibrateOptionOn;
+
+    public bool GetVibrateOption() => vibrateOptionOn;
+    public void SetVibrateOption(bool isVibrateOn)
+    {
+        vibrateOptionOn = isVibrateOn;
+    }
 
     #region Rubies
     public int GetRubyAmount()

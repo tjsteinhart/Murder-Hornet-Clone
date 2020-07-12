@@ -107,7 +107,11 @@ public class HornetController : MonoBehaviour
     {
         isMoving = false;
         hornetAnimator.SetTrigger("HornetSting");
-        Handheld.Vibrate();
+
+        if (GameManager.Instance.GetVibrateOption())
+        {
+            Handheld.Vibrate();
+        }
         if (targetManager.GetAllTargetsHit())
         {
             isMoving = false;
