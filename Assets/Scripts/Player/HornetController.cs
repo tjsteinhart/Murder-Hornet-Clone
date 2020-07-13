@@ -8,10 +8,16 @@ public class HornetController : MonoBehaviour
     [SerializeField] float currentSpeed = 3f;
     [SerializeField] float speedModifier = .5f;
     [SerializeField] float currentSting = 1;
-    [SerializeField] float stingModifier = 2f;
+    [SerializeField] float stingModifier = .3f;
     [SerializeField] float rotationspeed = 100f;
     [SerializeField] bool isMoving;
-
+    
+    public void SetIsMoving(bool move)
+    {
+        isMoving = move;
+        
+    }
+    
     public float CurrentSpeed() => currentSpeed;
     public float CurrentSting() => currentSting;
 
@@ -33,16 +39,10 @@ public class HornetController : MonoBehaviour
         targetManager = FindObjectOfType<TargetManager>();
     }
 
-    private void OnEnable()
-    {
-        UpdateMovement();
-    }
-
-    private void UpdateMovement()
+    public void UpdateMovement()
     {
         currentSting = currentSting + GameManager.Instance.GetStingForceModifier() * stingModifier;
         currentSpeed = currentSpeed + GameManager.Instance.GetPlayerSpeedModifier() * speedModifier;
-        isMoving = true;
     }
 
     // Update is called once per frame
@@ -73,7 +73,7 @@ public class HornetController : MonoBehaviour
             touch = Input.GetTouch(0);
             if (touch.phase == TouchPhase.Moved)
             {
-                
+
                 transform.Rotate(0f, touch.deltaPosition.x * touchRotateSpeedModifier, 0f, Space.World);
                 transform.Rotate(-touch.deltaPosition.y * touchRotateSpeedModifier, 0f, 0f);
             }

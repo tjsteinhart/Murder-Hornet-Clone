@@ -34,6 +34,12 @@ public class ExplosiveController : MonoBehaviour, IGetStung
 
     private void OnEnable()
     {
+        StartCoroutine(SubscribeToEvents());
+    }
+
+    IEnumerator SubscribeToEvents()
+    {
+        yield return new WaitForEndOfFrame();
         EventManager.Instance.onStartGameplay += StartWarningAnim;
         EventManager.Instance.onEndGamePlay += StopWarningAnim;
     }

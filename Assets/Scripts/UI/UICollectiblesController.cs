@@ -11,7 +11,7 @@ public class UICollectiblesController : MonoBehaviour
     [SerializeField] GameObject collectibleSlider;
     [SerializeField] List<Slider> collectibleSliders;
     bool collectibleGridOn = false;
-    int collectiblesGathered;
+    [SerializeField] int collectiblesGathered;
 
     // Start is called before the first frame update
     void Start()
@@ -82,7 +82,10 @@ public class UICollectiblesController : MonoBehaviour
 
     public void CalculateCollected(Transform transform)
     {
-        GameManager.Instance.IncrementCollectibleAmount(collectiblesGathered);
+        if(collectiblesGathered - GameManager.Instance.GetCollectibleAmount() > 0)
+        {
+            GameManager.Instance.IncrementCollectibleAmount(collectiblesGathered - GameManager.Instance.GetCollectibleAmount());
+        }
     }
 
 

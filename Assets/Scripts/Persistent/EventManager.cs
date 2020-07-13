@@ -17,12 +17,13 @@ public class EventManager : Singleton<EventManager>
     }
 
     #region Gameplay States
-    public event Action onStartGameplay;
+    public delegate void StartGamePlay();
+    public event StartGamePlay onStartGameplay;
     public void StartGameplay()
     {
         if (onStartGameplay != null)
         {
-            onStartGameplay();
+            onStartGameplay.Invoke();
         }
     }
 

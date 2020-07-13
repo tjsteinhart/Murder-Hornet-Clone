@@ -7,15 +7,21 @@ public class PlayerStartController : MonoBehaviour
     [SerializeField] GameObject nest;
     [SerializeField] GameObject nestTree;
     [SerializeField] ParticleSystem leaveNestFX;
-    [SerializeField] GameObject hornet;
+    [SerializeField] HornetController hornet;
     // Start is called before the first frame update
     void Start()
     {
-        hornet.SetActive(false);
+        hornet = GetComponentInChildren<HornetController>();
     }
 
     private void OnEnable()
     {
+        StartCoroutine(SubscribeToEvents());
+    }
+
+    IEnumerator SubscribeToEvents()
+    {
+        yield return new WaitForEndOfFrame();
         EventManager.Instance.onStartGameplay += HideNest;
     }
 
@@ -31,7 +37,8 @@ public class PlayerStartController : MonoBehaviour
     {
         nest.SetActive(false);
         nestTree.SetActive(false);
-        hornet.SetActive(true);
+        hornet.UpdateMovement();
+        hornet.SetIsMoving(true);
         leaveNestFX.Play();
     }
 

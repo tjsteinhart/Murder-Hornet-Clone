@@ -167,4 +167,4 @@ MonoBehaviour:
   targetingImage: {fileID: 0}
   targets: []
   currentTarget: {fileID: 0}
-  targetingImageAdjustments: {x: 0, y: 0.5, z: 0}
+  targetingImageAdjustments: {x: 0, y: 0, z: 0}

@@ -4862,7 +4862,7 @@ MonoBehaviour:
   nest: {fileID: 7978613251583455796}
   nestTree: {fileID: 7795253473562639533}
   leaveNestFX: {fileID: 7978613250327853517}
-  hornet: {fileID: 7577625477495964367}
+  hornet: {fileID: 7577625477495964365}
 --- !u!1 &7978613251583455796
 GameObject:
   m_ObjectHideFlags: 0
@@ -4874,7 +4874,6 @@ GameObject:
   - component: {fileID: 7978613251583455819}
   - component: {fileID: 7978613251583455816}
   - component: {fileID: 7978613251583455817}
-  - component: {fileID: 7978613251583455818}
   m_Layer: 0
   m_Name: Nest
   m_TagString: Untagged
@@ -4943,19 +4942,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &7978613251583455818
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7978613251583455796}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &4433861264159478438
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5086,7 +5072,7 @@ PrefabInstance:
     - target: {fileID: 545102972610265355, guid: b13d6cdf96c90404a8a20c4234f92815,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.423
       objectReference: {fileID: 0}
     - target: {fileID: 545102972610265355, guid: b13d6cdf96c90404a8a20c4234f92815,
         type: 3}
@@ -5128,17 +5114,38 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 545102972610265355, guid: b13d6cdf96c90404a8a20c4234f92815,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 545102972610265355, guid: b13d6cdf96c90404a8a20c4234f92815,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 545102972610265355, guid: b13d6cdf96c90404a8a20c4234f92815,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b13d6cdf96c90404a8a20c4234f92815, type: 3}
---- !u!1 &7577625477495964367 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 545102972610265352, guid: b13d6cdf96c90404a8a20c4234f92815,
-    type: 3}
-  m_PrefabInstance: {fileID: 7978613251022324679}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7577625477495964364 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 545102972610265355, guid: b13d6cdf96c90404a8a20c4234f92815,
     type: 3}
   m_PrefabInstance: {fileID: 7978613251022324679}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7577625477495964365 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 545102972610265354, guid: b13d6cdf96c90404a8a20c4234f92815,
+    type: 3}
+  m_PrefabInstance: {fileID: 7978613251022324679}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be6825b47ab33994698addaf46fb57a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

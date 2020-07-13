@@ -26,6 +26,7 @@ public class TargetController : MonoBehaviour, IGetStung
     {
         childCanvasTransform.position = childObjectTransform.position + canvasAdjustment;
         this.transform.position = childObjectTransform.position;
+        childCanvasTransform.LookAt(Camera.main.transform);
     }
 
     public void PlayExclamation()

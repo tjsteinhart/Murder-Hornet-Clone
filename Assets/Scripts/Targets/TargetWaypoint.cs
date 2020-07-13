@@ -39,7 +39,7 @@ public class TargetWaypoint : MonoBehaviour
             float minY = targetingImage.GetPixelAdjustedRect().height / 2;
             float maxY = Screen.height - minY;
 
-            Vector2 pos = Camera.main.WorldToScreenPoint(currentTarget.position + Vector3.up);
+            Vector2 pos = Camera.main.WorldToScreenPoint(currentTarget.position + targetingImageAdjustments);
 
             if(Vector3.Dot((currentTarget.position + Vector3.up) - transform.position, transform.forward) < 0)
             {
