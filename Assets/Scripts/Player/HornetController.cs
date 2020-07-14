@@ -80,6 +80,11 @@ public class HornetController : MonoBehaviour
         }
         rb.angularVelocity = Vector3.zero;
         rb.velocity = Vector3.zero;
+
+        if(this.transform.localEulerAngles.x > 30f)
+        {
+            Debug.Log("X Rotation past limit");
+        }
     }
 
     private void OnTriggerEnter(Collider other)
