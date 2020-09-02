@@ -375,7 +375,7 @@ PrefabInstance:
     - target: {fileID: 2743694332842965839, guid: 962177c54070a5f4192f254196f0b2a1,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5962837572617085744, guid: 962177c54070a5f4192f254196f0b2a1,
         type: 3}
@@ -402,15 +402,30 @@ PrefabInstance:
       propertyPath: m_RaycastTarget
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5962837572949681662, guid: 962177c54070a5f4192f254196f0b2a1,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0.025772996
+      objectReference: {fileID: 0}
+    - target: {fileID: 5962837572949681662, guid: 962177c54070a5f4192f254196f0b2a1,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.8773585
+      objectReference: {fileID: 0}
+    - target: {fileID: 5962837572949681662, guid: 962177c54070a5f4192f254196f0b2a1,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5962837572949681663, guid: 962177c54070a5f4192f254196f0b2a1,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 50
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 5962837572949681663, guid: 962177c54070a5f4192f254196f0b2a1,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 50
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 5962837573279632801, guid: 962177c54070a5f4192f254196f0b2a1,
         type: 3}
@@ -617,6 +632,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5962837573928916440, guid: 962177c54070a5f4192f254196f0b2a1,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5962837573928916443, guid: 962177c54070a5f4192f254196f0b2a1,
         type: 3}
       propertyPath: m_Name
@@ -808,6 +828,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Camera
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4922023809218467908, guid: f550a8d045cdd0b4f806ecf0307304bb,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4922023809814155105, guid: f550a8d045cdd0b4f806ecf0307304bb,
         type: 3}

@@ -9,24 +9,26 @@ public class TargetController : MonoBehaviour, IGetStung
     [SerializeField] bool canSting;
     [SerializeField] Transform childObjectTransform;
     [SerializeField] Transform childCanvasTransform;
+    [SerializeField] Transform childCameraTargetTransform;
     [SerializeField] Vector3 canvasAdjustment;
     [SerializeField] Rigidbody myRigidBody;
     [SerializeField] Collider triggerCollider;
-    HornetController hornet;
 
     public Rigidbody GetMyRigidBody() => myRigidBody;
+    public Transform GetCameraTargetTransform => childCameraTargetTransform;
 
     private void Start()
     {
         canSting = true;
-        hornet = FindObjectOfType<HornetController>();
     }
 
     private void Update()
     {
         childCanvasTransform.position = childObjectTransform.position + canvasAdjustment;
-        this.transform.position = childObjectTransform.position;
+        //this.transform.position = childObjectTransform.position;
         childCanvasTransform.LookAt(Camera.main.transform);
+
+        childCameraTargetTransform.position = childObjectTransform.position;
     }
 
     public void PlayExclamation()
@@ -39,7 +41,6 @@ public class TargetController : MonoBehaviour, IGetStung
         EventManager.Instance.TargetStung(this);
         canSting = false;
         PlayExclamation();
-        childCanvasTransform.LookAt(Camera.main.transform);
         triggerCollider.enabled = false;
     }
 

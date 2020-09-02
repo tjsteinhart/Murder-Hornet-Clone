@@ -4972,8 +4972,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosiveAnimator: {fileID: 5373428114263742514}
-  warningClipTime: 200
-  explosionForce: 5
+  explosionForce: 100
+  explosionUpForce: 40
   explosionRadius: 4
   explodeParticles: {fileID: 779707223}
   explosiveObject: {fileID: 5373428112745219006}

@@ -14,7 +14,8 @@ public class ExplosiveController : MonoBehaviour, IGetStung
     #endregion
 
     #region Explosion Variables
-    [SerializeField] float explosionForce = 5f;
+    [SerializeField] float explosionForce = 100f;
+    [SerializeField] float explosionUpForce = 40f;
     [SerializeField] float explosionRadius = 4f;
     [SerializeField] ParticleSystem explodeParticles;
     [SerializeField] GameObject explosiveObject;
@@ -103,7 +104,7 @@ public class ExplosiveController : MonoBehaviour, IGetStung
             TargetController target = objectInRange.GetComponent<TargetController>();
             if(target != null)
             {
-                target.GetMyRigidBody().AddExplosionForce(explosionForce, transform.position, explosionRadius, explosionForce, ForceMode.Impulse);
+                target.GetMyRigidBody().AddExplosionForce(explosionForce, transform.position, explosionRadius, explosionUpForce, ForceMode.Impulse);
                 target.GetStung();
             }
         }

@@ -5054,10 +5054,24 @@ PrefabInstance:
       propertyPath: m_MinVertexDistance
       value: 0.01
       objectReference: {fileID: 0}
+    - target: {fileID: 1204157093, guid: b13d6cdf96c90404a8a20c4234f92815, type: 3}
+      propertyPath: m_Time
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 545102972610265352, guid: b13d6cdf96c90404a8a20c4234f92815,
         type: 3}
       propertyPath: m_Name
       value: Hornet
+      objectReference: {fileID: 0}
+    - target: {fileID: 545102972610265354, guid: b13d6cdf96c90404a8a20c4234f92815,
+        type: 3}
+      propertyPath: currentSting
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 545102972610265354, guid: b13d6cdf96c90404a8a20c4234f92815,
+        type: 3}
+      propertyPath: stingModifier
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 545102972610265355, guid: b13d6cdf96c90404a8a20c4234f92815,
         type: 3}

@@ -71,7 +71,7 @@ public class TargetManager : MonoBehaviour
         if(targetList.Count <= 0)
         {
             allTargetsHit = true;
-            EventManager.Instance.FinalHit(target.transform);
+            EventManager.Instance.FinalHit(target.GetCameraTargetTransform);
         }
     }
 

@@ -25,7 +25,7 @@ public class UIStartController : MonoBehaviour
 
     public void UpgradeSpeed()
     {
-        if(GameManager.Instance.GetRubyAmount() > GameManager.Instance.GetSpeedUpgradeCost())
+        if(GameManager.Instance.GetRubyAmount() >= GameManager.Instance.GetSpeedUpgradeCost())
         {
             GameManager.Instance.IncrementPlayerSpeedModifier(1);
         }
@@ -34,7 +34,7 @@ public class UIStartController : MonoBehaviour
 
     public void UpgradeSting()
     {
-        if(GameManager.Instance.GetRubyAmount() > GameManager.Instance.GetStingUpgradeCost())
+        if(GameManager.Instance.GetRubyAmount() >= GameManager.Instance.GetStingUpgradeCost())
         {
             GameManager.Instance.IncrementPlayerStingModifier(1);
            

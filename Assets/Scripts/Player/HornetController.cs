@@ -7,8 +7,8 @@ public class HornetController : MonoBehaviour
 {
     [SerializeField] float currentSpeed = 3f;
     [SerializeField] float speedModifier = .5f;
-    [SerializeField] float currentSting = 1;
-    [SerializeField] float stingModifier = .3f;
+    [SerializeField] float currentSting = 50;
+    [SerializeField] float stingModifier = 5;
     [SerializeField] float rotationspeed = 100f;
     [SerializeField] bool isMoving;
     
